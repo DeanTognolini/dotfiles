@@ -1,0 +1,283 @@
+[colors]
+nord0 = #2E3440
+nord1 = #3B4252
+nord2 = #434C5E
+nord3 = #4C566A
+nord4 = #D8DEE9
+nord5 = #E5E9F0
+nord6 = #ECEFF4
+nord7 = #8FBCBB
+nord8 = #88C0D0
+nord9 = #81A1C1
+nord10 = #5E81AC
+nord11 = #BF616A
+nord12 = #D08770
+nord13 = #EBCB8B
+nord14 = #A3BE8C
+nord15 = #B48EAD
+
+[bar/main]
+width = 100%
+height = 24
+
+background = ${colors.nord1}
+
+wm-restack = bspwm
+
+# fonts
+font-0 = Font Awesome 6 Free Solid:style=Solid:size=12 
+font-1 = FiraCode Nerd Font Mono:style=Regular:size=12
+font-2 = FiraCode Nerd Font Mono:style=Regular:size=16
+
+# module placement
+modules-left = powermenu bspwm 
+modules-right = cpu memory pulseaudio time date wired-network wireless-network
+
+[bar/left]
+monitor = DP-3
+inherit = bar/main
+modules-left = bspwm
+modules-right =
+
+[bar/center]
+monitor = DP-2
+inherit = bar/main
+
+[bar/right]
+monitor = HDMI-1
+inherit = bar/main
+modules-left = bspwm
+modules-right = 
+
+[module/bspwm]
+type = internal/bspwm
+format = <label-state>
+
+ws-icon-0 = 1;󰬺
+ws-icon-1 = 2;󰬻
+ws-icon-2 = 3;󰬼
+ws-icon-3 = 4;󰬽
+ws-icon-4 = 5;󰬾
+ws-icon-5 = 6;󰬿
+ws-icon-6 = 7;󰭀
+ws-icon-7 = 8;󰭁
+ws-icon-8 = 9;󰭂
+
+#ws-icon-0 = 1;󰫶
+#ws-icon-1 = 2;󰫶󰫶
+#ws-icon-2 = 3;󰫶󰫶󰫶
+#ws-icon-3 = 4;󰫶󰬃
+#ws-icon-4 = 5;󰬃
+#ws-icon-5 = 6;󰬃󰫶
+#ws-icon-6 = 7;󰬃󰫶
+#ws-icon-7 = 8;󰬃󰫶󰫶
+#ws-icon-8 = 9;󰫶󰬅
+ws-icon-default = 
+
+label-focused-occupied = %icon%
+label-focused-occupied-foreground = ${colors.nord0}
+label-focused-occupied-background = ${colors.nord8}
+label-focused-occupied-padding = 1
+
+label-focused-urgent = %icon%
+label-focused-urgent-foreground = ${colors.nord0}
+label-focused-urgent-background = ${colors.nord11}
+label-focused-urgent-padding = 1
+
+label-focused-empty = %icon%
+label-focused-empty-foreground = ${colors.nord0}
+label-focused-empty-background = ${colors.nord8}
+label-focused-empty-padding = 1
+
+label-occupied = %icon%
+label-occupied-foreground = ${colors.nord0}
+label-occupied-background = ${colors.nord9}
+label-occupied-padding = 1
+
+label-urgent = %icon% 
+label-urgent-foreground = ${colors.nord0}
+label-urgent-background = ${colors.nord13}
+label-urgent-padding = 1
+
+label-empty = %icon%
+label-empty-foreground = ${colors.nord0}
+label-empty-background = ${colors.nord9}
+label-empty-padding = 1
+
+[module/date]
+type = internal/date
+interval = 60
+date = %d/%m/%y
+
+format-foreground = ${colors.nord0}
+format-background = ${colors.nord9}
+
+label = " %date% "
+label-font = 2
+
+[module/time]
+type = internal/date
+time = %H:%M
+
+format-foreground = ${colors.nord0}
+format-background = ${colors.nord9}
+format-padding = 1
+
+label = "%time%"
+label-font = 2
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ACAD
+full-at = 99
+low-at = 15
+
+format-charging = <label-charging>
+format-charging-foreground = ${colors.nord0}
+format-charging-background = ${colors.nord14}
+format-charging-padding = 1
+
+label-charging = BAT:%percentage%%
+label-charging-font = 2
+
+format-full = <label-full>
+format-full-foreground = ${colors.nord0}
+format-full-background = ${colors.nord14}
+format-full-padding = 1
+
+label-full = BAT:%percentage%%
+label-full-font = 2
+
+format-discharging = <label-discharging>
+format-discharging-foreground = ${colors.nord0}
+format-discharging-background = ${colors.nord10}
+format-discharging-padding = 1
+
+label-discharging = BAT:%percentage%%
+label-discharging-font = 2
+
+format-low = <label-low>
+format-low-foreground = ${colors.nord0}
+format-low-background = ${colors.nord12}
+format-low-padding = 1
+
+label-low = BAT:%percentage%%
+label-low-font = 2
+
+[module/pulseaudio]
+type = internal/pulseaudio
+interval = 2
+
+click-right= pavucontrol
+
+format-volume-foreground = ${colors.nord0}
+format-volume-background = ${colors.nord10}
+format-muted-foreground = ${colors.nord0}
+format-muted-background = ${colors.nord10}
+format-volume-padding = 1
+format-muted-padding = 1
+
+label-volume = "V:%percentage%%"
+label-volume-font = 2
+label-muted =  "V:M"
+label-muted-font = 2
+
+[module/powermenu]
+type = custom/text
+content-padding = 1
+click-left = "$HOME/.config/rofi/powermenu/powermenu.sh"
+content = "⏻"
+
+[module/wired-network]
+type = internal/network
+interface = enp89s0 
+interface-type = wired
+interval = 1
+
+format-connected = <label-connected>
+format-connected-padding = 1
+format-connected-foreground = ${colors.nord0}
+format-connected-background = ${colors.nord14}
+
+format-disconnected = <label-connected>
+format-disconnected-padding = 1
+format-disconnected-foreground = ${colors.nord0}
+format-disconnected-background = ${colors.nord12}
+
+label-connected = 
+label-connected-font = 1
+
+[module/wireless-network]
+type = internal/network
+interface = wlan0
+interface-type = wireless
+interval = 1
+
+format-connected = <label-connected>
+format-connected-padding = 1
+format-connected-foreground = ${colors.nord0}
+format-connected-background = ${colors.nord14}
+label-connected = 
+
+format-disconnected = <label-disconnected>
+format-disconnected-padding = 1
+format-disconnected-foreground = ${colors.nord0}
+format-disconnected-background = ${colors.nord12}
+label-disconnected = 
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+warn-percentage = 95
+
+format-foreground = ${colors.nord0}
+format-background = ${colors.nord10}
+format-padding = 1
+
+label = C:%percentage%%
+label-warn = C:%percentage%%
+label-font = 2
+label-warn-font = 2
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+use-actual-brightness = true
+
+format = <label>
+format-foreground = ${colors.nord0}
+format-background = ${colors.nord10}
+format-padding = 1
+
+label = LGT:%percentage%%
+label-font = 2
+
+[module/memory]
+type = internal/memory
+interval = 3
+warn-percentage = 95
+
+format = <label> 
+format-foreground = ${colors.nord0}
+format-background = ${colors.nord10}
+format-padding = 1
+
+label = M:%used%
+label-warn = M:%used%
+label-font = 2
+label-warn-font = 2
+
+[module/player-mpris-simple]
+type = custom/script
+exec = ~/polybar-scripts/player-mpris-simple.sh
+interval = 3
+click-left = playerctl previous &
+click-right = playerctl next &
+click-middle = playerctl play-pause &
+
+format = <label> 
+format-foreground = ${colors.nord0}
+format-background = ${colors.nord9}
+format-padding = 1
+format-font = 2
